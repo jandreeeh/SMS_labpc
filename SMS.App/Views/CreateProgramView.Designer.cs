@@ -112,7 +112,7 @@
             Controls.Add(label1);
             Controls.Add(textBoxProgramName);
             Name = "CreateProgramView";
-            Text = "CreateProgramView";
+            Text = "Add Program";
             ResumeLayout(false);
             PerformLayout();
         }

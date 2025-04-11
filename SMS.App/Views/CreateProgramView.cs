@@ -17,24 +17,43 @@ namespace SMS.App.Views
     public partial class CreateProgramView : Form
     {
         private AppDbContext _dbContext;
-        public CreateProgramView()
+        private Programs? _editProgram;
+
+        public CreateProgramView(Programs editProgram = null)
         {
             InitializeComponent();
             _dbContext = new AppDbContext();
+            _editProgram = editProgram;
+
+            if(editProgram != null)
+            {
+                textBoxProgramName.Text = _editProgram.ProgramName;
+                textBoxDescription.Text = _editProgram.Description;
+            }
         }
 
         private async void buttonCreate_Click(object sender, EventArgs e)
         {
-            var program = new Programs
+            if(_editProgram == null) { 
+                _editProgram = new Programs
+                {
+                    ProgramName = textBoxProgramName.Text,
+                    Description = textBoxDescription.Text
+                };
+                await _dbContext.Programs.AddAsync(_editProgram);
+
+                MessageBox.Show("Program Created Successfully");
+            }
+            else
             {
-                ProgramName = textBoxProgramName.Text,
-                Description = textBoxDescription.Text
-            };
-            await _dbContext.Programs.AddAsync(program);
+                _editProgram.ProgramName = textBoxProgramName.Text;
+                _editProgram.Description = textBoxDescription.Text;
+                _dbContext.Programs.Update(_editProgram);
+
+                MessageBox.Show("Program Updated Successfully");
+            }
+
             await _dbContext.SaveChangesAsync();
-
-            MessageBox.Show("Program Created Successfully");
-
             DialogResult = DialogResult.OK;
             Close();
         }

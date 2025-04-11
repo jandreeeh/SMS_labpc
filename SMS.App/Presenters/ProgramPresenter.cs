@@ -78,14 +78,15 @@ namespace SMS.App.Presenters
                     return;
                 }
 
-                editProgram.ProgramName = _programView.ProgramName;
-                editProgram.Description = _programView.Description;
+                using (var createProgram = new CreateProgramView(editProgram))
+                {
+                    createProgram.Text = "Edit Program";
+                    if (createProgram.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadProgramList();
 
-                _dbContext.Programs.Update(editProgram);
-                _dbContext.SaveChanges();
-
-                _programView.SetMessage("Program Updated Successfully");
-                LoadProgramList();
+                    }
+                }
             }
             catch (Exception ex)
             {
