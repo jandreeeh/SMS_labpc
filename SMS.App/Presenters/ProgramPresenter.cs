@@ -58,21 +58,25 @@ namespace SMS.App.Presenters
 
         private void DeleteEvent(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var entity = (Programs)_bindingSource.Current;
+            _dbContext.Programs.Remove(entity);
+            _dbContext.SaveChanges();
+
+            _programView.SetMessage("Program Deleted Successfully");
+            LoadProgramList();
         }
 
         private void UpdateEvent(object? sender, EventArgs e)
         {
-            var program = new Programs
-            {
-                ProgramId = _programView.ProgramId,
-                ProgramName = _programView.ProgramName,
-                Description = _programView.Description
-            };
-            _dbContext.Programs.Update(program);
+            var editProgram = _dbContext.Programs.Find(_programView.ProgramId);
+            editProgram.ProgramName = _programView.ProgramName;
+            editProgram.Description = _programView.Description;
+
+            _dbContext.Programs.Update(editProgram);
             _dbContext.SaveChanges();
 
             _programView.SetMessage("Program Updated Successfully");
+            LoadProgramList();
         }
 
         private async void ReadEvent(object? sender, EventArgs e)
