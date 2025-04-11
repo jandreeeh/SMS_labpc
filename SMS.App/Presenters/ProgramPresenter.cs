@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SMS.App.Views;
 using SMS.App.Views.IViews;
 using SMS.Domain;
 using SMS.Infastructure.Data;
@@ -46,7 +47,7 @@ namespace SMS.App.Presenters
         {
             _programList = _dbContext.Programs.ToList();
 
-            if(search != null)
+            if (search != null)
             {
                 _programList = _programList
                     .Where(c => c.ProgramId.ToString()
@@ -68,15 +69,33 @@ namespace SMS.App.Presenters
 
         private void UpdateEvent(object? sender, EventArgs e)
         {
-            var editProgram = _dbContext.Programs.Find(_programView.ProgramId);
-            editProgram.ProgramName = _programView.ProgramName;
-            editProgram.Description = _programView.Description;
+            try
+            {
+                var editProgram = _dbContext.Programs.Find(_programView.ProgramId);
+                if (editProgram == null)
+                {
+                    _programView.SetMessage("Program Not Found");
+                    return;
+                }
 
-            _dbContext.Programs.Update(editProgram);
-            _dbContext.SaveChanges();
+                editProgram.ProgramName = _programView.ProgramName;
+                editProgram.Description = _programView.Description;
 
-            _programView.SetMessage("Program Updated Successfully");
-            LoadProgramList();
+                _dbContext.Programs.Update(editProgram);
+                _dbContext.SaveChanges();
+
+                _programView.SetMessage("Program Updated Successfully");
+                LoadProgramList();
+            }
+            catch (Exception ex)
+            {
+                _programView.SetMessage($"Error: {ex.Message}");
+                return;
+            }
+            finally
+            {
+                LoadProgramList();
+            }
         }
 
         private async void ReadEvent(object? sender, EventArgs e)
@@ -88,19 +107,16 @@ namespace SMS.App.Presenters
             LoadProgramList(_programView.SearchValue);
         }
 
-        private async void CreateEvent(object? sender, EventArgs e)
+        private void CreateEvent(object? sender, EventArgs e)
         {
-            var program = new Programs
+            using (var createProgram = new CreateProgramView())
             {
-                ProgramName = _programView.ProgramName,
-                Description = _programView.Description
-            };
-            await _dbContext.Programs.AddAsync(program);
-            await _dbContext.SaveChangesAsync(); 
-            
-            _programView.SetMessage("Program Created Successfully");
+                if (createProgram.ShowDialog() == DialogResult.OK)
+                {
+                    LoadProgramList();
 
-            LoadProgramList();
+                }
+            }
         }
     }
 }
