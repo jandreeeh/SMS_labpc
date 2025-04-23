@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace SMS.Domain
 {
-    public class AppUser: IdentityUser
+    public class AppUser : IdentityUser
     {
-
     }
 }

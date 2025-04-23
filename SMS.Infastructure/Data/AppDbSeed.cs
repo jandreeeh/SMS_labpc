@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SMS.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SMS.Infastructure.Data
 {
@@ -10,13 +15,14 @@ namespace SMS.Infastructure.Data
         {
             var passwordHasher = new PasswordHasher<AppUser>();
 
-            var appUser = new AppUser
-            {
+            var appUser = new AppUser{
                 Id = Guid.NewGuid().ToString(),
+                UserName = "admin", 
                 PasswordHash = passwordHasher.HashPassword(null, "admin"),
             };
 
-            builder.Entity<AppUser>().HasData(appUser); 
+            builder.Entity<AppUser>().HasData(appUser);
+
         }
     }
 }
