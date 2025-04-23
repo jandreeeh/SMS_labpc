@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SMS.Infastructure.Data;
 
@@ -11,9 +12,11 @@ using SMS.Infastructure.Data;
 namespace SMS.Infastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250422064425_Identities")]
+    partial class Identities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,21 +221,6 @@ namespace SMS.Infastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "f8dff6df-34b7-4bcf-9366-3be7be67827a",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0a5ebe4-f638-469b-8deb-3e367e0eb754",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEGXRVAgKo7Il0p5KIJTxWpd7WcRPs3MUFiQYI9l8uzvqDzLak73ETyQrPDYFUreB5Q==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "5ce28af2-3409-4f06-879c-2017ec5f7c9b",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("SMS.Domain.Programs", b =>

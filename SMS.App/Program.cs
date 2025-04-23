@@ -1,4 +1,5 @@
 using SMS.App.Presenters;
+using SMS.App.Views;
 using SMS.App.Views.IViews;
 
 namespace SMS.App
@@ -15,10 +16,10 @@ namespace SMS.App
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            IProgramView programView = new ProgramView();
-            new ProgramPresenter(programView);
+            ILoginForm view = new LoginForm();
+            new LoginPresenter(view);
 
-            Application.Run((Form)programView);
+            Application.Run((Form)view);
         }
     }
 }

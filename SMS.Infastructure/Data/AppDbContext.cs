@@ -7,6 +7,7 @@ namespace SMS.Infastructure.Data
     public class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext() : base() { }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -20,6 +21,7 @@ namespace SMS.Infastructure.Data
             base.OnModelCreating(builder);
         }
 
+        public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Programs> Programs { get; set; }
     }

@@ -6,14 +6,14 @@
         int ProgramId { get; set; }
         string ProgramName { get; set; }
         string SearchValue { get; }
-
         event EventHandler CreateEvent;
         event EventHandler ReadEvent;
         event EventHandler UpdateEvent;
-        event EventHandler DeleteEvent;
+        event EventHandler DeleteEvent; 
         event EventHandler GetInfoEvent;
 
         void GetProgramList(BindingSource bindingSource);
         void SetMessage(string message);
+        void ShowForm();
     }
 }

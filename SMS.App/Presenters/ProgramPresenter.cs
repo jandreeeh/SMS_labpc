@@ -47,11 +47,11 @@ namespace SMS.App.Presenters
         {
             _programList = _dbContext.Programs.ToList();
 
-            if (search != null)
+            if(search != null)
             {
                 _programList = _programList
-                    .Where(c => c.ProgramId.ToString()
-                    .Contains(search) || c.ProgramName.Contains(search)).ToList();
+                    .Where(c => c.ProgramId.ToString().Contains(search) || c.ProgramName.Contains(search))
+                    .ToList();
             }
 
             _bindingSource.DataSource = _programList;
@@ -72,6 +72,7 @@ namespace SMS.App.Presenters
             try
             {
                 var editProgram = _dbContext.Programs.Find(_programView.ProgramId);
+
                 if (editProgram == null)
                 {
                     _programView.SetMessage("Program Not Found");
@@ -80,31 +81,26 @@ namespace SMS.App.Presenters
 
                 using (var createProgram = new CreateProgramView(editProgram))
                 {
-                    createProgram.Text = "Edit Program";
                     if (createProgram.ShowDialog() == DialogResult.OK)
                     {
+                        createProgram.Text = "Edit Program";
                         LoadProgramList();
-
                     }
                 }
             }
             catch (Exception ex)
             {
                 _programView.SetMessage($"Error: {ex.Message}");
-                return;
             }
             finally
             {
                 LoadProgramList();
             }
+            
         }
 
-        private async void ReadEvent(object? sender, EventArgs e)
+        private void ReadEvent(object? sender, EventArgs e)
         {
-            //var entity = await _dbContext.Programs
-            //    .Where(c => c.ProgramId == _programView.ProgramId)
-            //    .ToListAsync();
-
             LoadProgramList(_programView.SearchValue);
         }
 
@@ -112,10 +108,9 @@ namespace SMS.App.Presenters
         {
             using (var createProgram = new CreateProgramView())
             {
-                if (createProgram.ShowDialog() == DialogResult.OK)
+                if(createProgram.ShowDialog() == DialogResult.OK)
                 {
                     LoadProgramList();
-
                 }
             }
         }

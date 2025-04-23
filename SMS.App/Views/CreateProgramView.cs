@@ -19,13 +19,13 @@ namespace SMS.App.Views
         private AppDbContext _dbContext;
         private Programs? _editProgram;
 
-        public CreateProgramView(Programs editProgram = null)
+        public CreateProgramView(Programs? editProgram = null)
         {
             InitializeComponent();
             _dbContext = new AppDbContext();
             _editProgram = editProgram;
 
-            if(editProgram != null)
+            if(_editProgram != null)
             {
                 textBoxProgramName.Text = _editProgram.ProgramName;
                 textBoxDescription.Text = _editProgram.Description;
@@ -34,7 +34,9 @@ namespace SMS.App.Views
 
         private async void buttonCreate_Click(object sender, EventArgs e)
         {
-            if(_editProgram == null) { 
+
+            if(_editProgram == null)
+            {
                 _editProgram = new Programs
                 {
                     ProgramName = textBoxProgramName.Text,
@@ -53,7 +55,8 @@ namespace SMS.App.Views
                 MessageBox.Show("Program Updated Successfully");
             }
 
-            await _dbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
+
             DialogResult = DialogResult.OK;
             Close();
         }

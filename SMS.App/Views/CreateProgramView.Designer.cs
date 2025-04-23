@@ -39,10 +39,9 @@
             // 
             // buttonCreate
             // 
-            buttonCreate.Location = new Point(42, 172);
-            buttonCreate.Margin = new Padding(3, 2, 3, 2);
+            buttonCreate.Location = new Point(92, 243);
             buttonCreate.Name = "buttonCreate";
-            buttonCreate.Size = new Size(240, 22);
+            buttonCreate.Size = new Size(274, 29);
             buttonCreate.TabIndex = 13;
             buttonCreate.Text = "Create";
             buttonCreate.UseVisualStyleBackColor = true;
@@ -51,59 +50,56 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(42, 33);
+            label3.Location = new Point(92, 58);
             label3.Name = "label3";
-            label3.Size = new Size(24, 15);
+            label3.Size = new Size(30, 20);
             label3.TabIndex = 12;
             label3.Text = "I.D.";
             // 
             // textBoxId
             // 
-            textBoxId.Location = new Point(42, 50);
-            textBoxId.Margin = new Padding(3, 2, 3, 2);
+            textBoxId.Location = new Point(92, 81);
             textBoxId.Name = "textBoxId";
-            textBoxId.Size = new Size(240, 23);
+            textBoxId.Size = new Size(274, 27);
             textBoxId.TabIndex = 11;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(42, 113);
+            label2.Location = new Point(92, 164);
             label2.Name = "label2";
-            label2.Size = new Size(67, 15);
+            label2.Size = new Size(85, 20);
             label2.TabIndex = 10;
             label2.Text = "Description";
             // 
             // textBoxDescription
             // 
-            textBoxDescription.Location = new Point(42, 130);
-            textBoxDescription.Margin = new Padding(3, 2, 3, 2);
+            textBoxDescription.Location = new Point(92, 187);
             textBoxDescription.Name = "textBoxDescription";
-            textBoxDescription.Size = new Size(240, 23);
+            textBoxDescription.Size = new Size(274, 27);
             textBoxDescription.TabIndex = 9;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(42, 73);
+            label1.Location = new Point(92, 111);
             label1.Name = "label1";
-            label1.Size = new Size(88, 15);
+            label1.Size = new Size(110, 20);
             label1.TabIndex = 8;
             label1.Text = "Program Name";
             // 
             // textBoxProgramName
             // 
-            textBoxProgramName.Location = new Point(42, 90);
-            textBoxProgramName.Margin = new Padding(3, 2, 3, 2);
+            textBoxProgramName.Location = new Point(92, 134);
             textBoxProgramName.Name = "textBoxProgramName";
-            textBoxProgramName.Size = new Size(240, 23);
+            textBoxProgramName.Size = new Size(274, 27);
             textBoxProgramName.TabIndex = 7;
             // 
             // CreateProgramView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(316, 233);
+            ClientSize = new Size(459, 331);
             Controls.Add(buttonCreate);
             Controls.Add(label3);
             Controls.Add(textBoxId);
